@@ -1,5 +1,7 @@
+import { CategoryTable } from "../components/table/categories/CategoryTable";
+
 const CategoryPage = () => {
-  return <div>CategoryPage</div>;
+  return <CategoryTable />;
 };
 
 export default CategoryPage;

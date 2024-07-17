@@ -12,7 +12,7 @@ const Layout = ({ children }: Props) => {
       <Header />
       <div className="flex gap-5 my-4">
         <SideBar />
-        <div className="container bg-light-1 mx-auto rounded-lg">
+        <div className="container bg-light-1 mx-auto rounded-lg py-6 px-4">
           {children}
         </div>
       </div>

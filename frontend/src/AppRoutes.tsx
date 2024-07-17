@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./layouts/Layout";
 import HomePage from "./pages/HomePage";
 import MenuPage from "./pages/MenuPage";
+import CategoryPage from "./pages/CategoryPage";
 
 const AppRoutes = () => {
   return (
@@ -20,6 +21,14 @@ const AppRoutes = () => {
           element={
             <Layout>
               <MenuPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/categories"
+          element={
+            <Layout>
+              <CategoryPage />
             </Layout>
           }
         />

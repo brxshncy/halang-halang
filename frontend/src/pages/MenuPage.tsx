@@ -5,7 +5,7 @@ import MenuLists from "../components/MenuLists";
 
 const MenuPage = () => {
   return (
-    <div className="flex flex-col py-6 px-4">
+    <div className="flex flex-col">
       <div className="flex justify-between items-center">
         <h4 className="font-bold">Categories</h4>
         <div className="flex items-center gap-3">

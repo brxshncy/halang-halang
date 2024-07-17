@@ -24,5 +24,13 @@ export const createCategory = async (req: Request, res: Response) => {
 
 export const getCategories = async (req: Request, res: Response) => {
   try {
-  } catch (error) {}
+    const categories = await Category.find({});
+
+    return res.status(200).json(categories);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "Something went wrong!",
+    });
+  }
 };
