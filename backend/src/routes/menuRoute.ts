@@ -15,7 +15,7 @@ const upload = multer({
 
 menuRoutes
   .route("/")
-  .post(protectedRoutes, menuValidator, upload.single("imageFile"), createMenu)
+  .post(protectedRoutes, upload.single("imageFile"), menuValidator, createMenu)
   .get(protectedRoutes, getMenu);
 
 export default menuRoutes;

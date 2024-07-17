@@ -26,7 +26,7 @@ const menuSchema = new mongoose.Schema(
       ref: "Category",
       required: true,
     },
-    image: {
+    imageUrl: {
       type: String,
       default: null, // Default value is null if no image is provided
     },
