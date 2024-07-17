@@ -2,16 +2,9 @@ import express from "express";
 import { createMenu, getMenu } from "../controller/menuController";
 import protectedRoutes from "./../middleware/auth";
 import { menuValidator } from "../validators/menuValidation";
-import multer from "multer";
-const menuRoutes = express.Router();
+import { upload } from "../utils/multer";
 
-const storage = multer.memoryStorage();
-const upload = multer({
-  storage: storage,
-  limits: {
-    fileSize: 5 * 1024 * 1024, // 5mb
-  },
-});
+const menuRoutes = express.Router();
 
 menuRoutes
   .route("/")

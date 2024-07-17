@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import Category from "../models/Category";
 import Menu from "../models/Menu";
 import cloudinary from "cloudinary";
+import { uploadImageToCloudinary } from "../utils/uploadImage";
 
 export const createMenu = async (req: Request, res: Response) => {
   try {
@@ -15,17 +16,16 @@ export const createMenu = async (req: Request, res: Response) => {
       });
     }
 
-    const image = req.file as Express.Multer.File;
-    const base64Image = Buffer.from(image.buffer).toString("base64");
-    const dataUri = `data:${image.mimetype};base64,${base64Image}`;
-    const uploadResponse = await cloudinary.v2.uploader.upload(dataUri);
+    const imageUrl = await uploadImageToCloudinary(
+      req.file as Express.Multer.File
+    );
 
     const menu = new Menu({
       name,
       description,
       price,
       category,
-      imageUrl: uploadResponse.url,
+      imageUrl,
     });
 
     await menu.save();

@@ -1,11 +1,19 @@
 import { Request, Response } from "express";
 import Category from "../models/Category";
+import { uploadImageToCloudinary } from "../utils/uploadImage";
 
 export const createCategory = async (req: Request, res: Response) => {
   try {
     const { name } = req.body;
 
-    const category = new Category({ name });
+    const imageUrl = await uploadImageToCloudinary(
+      req.file as Express.Multer.File
+    );
+
+    const category = new Category({
+      name,
+      imageUrl,
+    });
 
     await category.save();
     res.status(201).json(category);

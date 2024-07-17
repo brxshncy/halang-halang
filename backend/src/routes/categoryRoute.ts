@@ -5,12 +5,18 @@ import {
   getCategories,
 } from "../controller/categoryController";
 import { categoryValidator } from "../validators/categoryValidation";
+import { upload } from "../utils/multer";
 
 const categoryRoutes = express.Router();
 
 categoryRoutes
   .route("/")
-  .post(protectedRoutes, categoryValidator, createCategory)
+  .post(
+    protectedRoutes,
+    upload.single("imageFile"),
+    categoryValidator,
+    createCategory
+  )
   .get(protectedRoutes, getCategories);
 
 export default categoryRoutes;
