@@ -7,7 +7,6 @@ export const createMenu = async (req: Request, res: Response) => {
   try {
     const { name, description, price, category } = req.body;
 
-    console.log("req.body>", req.body);
     const categoryExists = await Category.findById(category);
 
     if (!categoryExists) {
