@@ -12,9 +12,9 @@ const categoryRoutes = express.Router();
 categoryRoutes
   .route("/")
   .post(
-    protectedRoutes,
     upload.single("imageFile"),
     categoryValidator,
+    protectedRoutes,
     createCategory
   )
   .get(protectedRoutes, getCategories);

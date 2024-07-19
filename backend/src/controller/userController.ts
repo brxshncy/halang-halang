@@ -13,6 +13,7 @@ export const generateToken = (id: string) => {
 export const loginUser = async (req: Request, res: Response) => {
   const { usernameOrEmail, password } = req.body;
 
+  console.log(req.body);
   try {
     const user = await User.findOne({
       $or: [{ username: usernameOrEmail }, { email: usernameOrEmail }],
