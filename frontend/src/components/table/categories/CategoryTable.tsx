@@ -1,27 +1,34 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useCreateCategory, useGetCategories } from "../../../api/CategoryApi";
 import FormModal from "../../common/FormModal";
 import { Button } from "../../ui/button";
 import { columns } from "./columns";
 import { DataTable } from "./data-table";
 import CategoryForm from "../../../forms/category-form/CategoryForm";
+import WarningModal from "../../common/WarningModal";
 
 export const CategoryTable = () => {
   const { categories, isLoading } = useGetCategories();
   const [openCategoryModal, setOpenCategoryModal] = useState<boolean>(false);
+  const [categoryToRemove, setCategoryToRemove] = useState<Category | null>(
+    null
+  );
   const { createCategory, isLoading: isCreatingLoading } = useCreateCategory();
 
   const closeModal = () => {
     setOpenCategoryModal(false);
+    setCategoryToRemove(null);
+  };
+
+  const handleRemoveCategory = (category) => {
+    console.log("test");
+    setCategoryToRemove(category);
+    setOpenCategoryModal(true);
   };
 
   if (isLoading) {
     return null;
   }
-
-  useEffect(() => {
-    console.log("isreRender");
-  }, []);
 
   return (
     <div className="container mx-auto py-10">
@@ -31,16 +38,20 @@ export const CategoryTable = () => {
           Add New Category
         </Button>
       </div>
-      <DataTable columns={columns} data={categories} />
+      <DataTable columns={columns(handleRemoveCategory)} data={categories} />
       <FormModal
         isOpen={openCategoryModal}
         closeModal={closeModal}
         title="Create New Catregory"
         children={
-          <CategoryForm
-            onSaveCategory={createCategory}
-            isLoading={isCreatingLoading}
-          />
+          categoryToRemove ? (
+            <WarningModal warningMessage="Are you sure you want to remove this category" />
+          ) : (
+            <CategoryForm
+              onSaveCategory={createCategory}
+              isLoading={isCreatingLoading}
+            />
+          )
         }
       />
     </div>

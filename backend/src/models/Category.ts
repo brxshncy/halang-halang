@@ -2,6 +2,7 @@ import mongoose, { Document } from "mongoose";
 
 interface CategoryDocument extends Document {
   name: string;
+  imageUrl: string;
 }
 
 const categorySchema = new mongoose.Schema(

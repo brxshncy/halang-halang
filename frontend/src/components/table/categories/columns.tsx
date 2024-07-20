@@ -11,7 +11,9 @@ export type Category = {
   amount: string;
 };
 
-export const columns: ColumnDef<Category>[] = [
+export const columns: (
+  onRemoveCategory: (category: Category) => void
+) => ColumnDef<Category>[] = (onRemoveCategory) => [
   {
     accessorKey: "name",
     header: "Name",
@@ -35,6 +37,7 @@ export const columns: ColumnDef<Category>[] = [
     accessorKey: "amount",
     header: "Action",
     cell: ({ row }) => {
+      const category = row.original;
       return (
         <div className="flex gap-2">
           <Button
@@ -47,6 +50,7 @@ export const columns: ColumnDef<Category>[] = [
           <Button
             variant="outline"
             className="flex gap-2 bg-red-600 text-white border-none hover:bg-red-700 hover:text-white"
+            onClick={() => onRemoveCategory(category)}
           >
             <Trash size={18} />
             <span>Remove</span>
