@@ -42,10 +42,13 @@ export const CategoryTable = () => {
       <FormModal
         isOpen={openCategoryModal}
         closeModal={closeModal}
-        title="Create New Catregory"
+        containerClassName={
+          categoryToRemove ? "max-w-[400px] w-full px-6 pt-9 pb-5" : ""
+        }
+        title={categoryToRemove ? "Delete Category" : "Create New Catregory"}
         children={
           categoryToRemove ? (
-            <WarningModal warningMessage="Are you sure you want to remove this category" />
+            <WarningModal warningMessage="Are you sure you want to remove this category?" />
           ) : (
             <CategoryForm
               onSaveCategory={createCategory}
