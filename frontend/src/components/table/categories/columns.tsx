@@ -8,12 +8,12 @@ export type Category = {
   _id: string;
   name: string;
   imageUrl: string;
-  amount: string;
 };
 
 export const columns: (
-  onRemoveCategory: (category: Category) => void
-) => ColumnDef<Category>[] = (onRemoveCategory) => [
+  onRemoveCategory: (category: Category) => void,
+  handleEditCategory: (category: Category) => void
+) => ColumnDef<Category>[] = (onRemoveCategory, handleEditCategory) => [
   {
     accessorKey: "name",
     header: "Name",
@@ -42,6 +42,7 @@ export const columns: (
         <div className="flex gap-2">
           <Button
             variant="outline"
+            onClick={() => handleEditCategory(category)}
             className="flex gap-2 bg-blue-500 text-white border-none hover:bg-blue-600 hover:text-white"
           >
             <Pencil size={18} />

@@ -7,14 +7,18 @@ type Props = {
   onCancel?: () => void;
 };
 
-const WarningModal = ({ warningMessage }: Props) => {
+const WarningModal = ({ warningMessage, handleDelete, onCancel }: Props) => {
   return (
     <div className="space-y-2">
       {warningMessage}
 
       <div className="flex flex-col gap-2 mt-3">
-        <Button variant="outline">Cancel</Button>
-        <Button variant="destructive">Delete</Button>
+        <Button variant="outline" onClick={onCancel}>
+          Cancel
+        </Button>
+        <Button variant="destructive" onClick={handleDelete}>
+          Delete
+        </Button>
       </div>
     </div>
   );
